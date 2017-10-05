@@ -1,0 +1,39 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${vcap.services.discovery-service.credentials.uri:http://127.0.0.1:8761/eureka/,http://127.0.0.1:8762/eureka/}
+  instance:
+    hostname: ${vcap.application.uris[0]:localhost}
+
+server:
+  contextPath: /uaa
+  port: 9999
+#  ssl:
+#    key-store: classpath: myauth.jks
+#    key-store:password: myauth
+#    key-password: myauth
+
+jwt:
+  token:
+    signing:
+      key: 123
+
+user:
+  name: user
+  password: user
+  role: USER
+
+admin:
+  name: admin
+  password: admin
+  role: ADMIN
+
+security:
+  oauth2:
+    client:
+      client-id: ${vcap.services.sso-service.credentials.clientId:petstore}
+      client-secret: ${vcap.services.sso-service.credetials.clientSecret:petstoresecret}
+      authorized-grant-types: ${vcap.services.sso-service.credentials.authorized-grant-types:authorization_code,refresh_token,implicit,password,client_credentials}
+      scope: ${vcap.services.sso-service.credentials.scope:abcde}
+      auto-approve-scopes: ${vcap.services.sso-service.credentials.auto-approve-scopes:abcde}
+

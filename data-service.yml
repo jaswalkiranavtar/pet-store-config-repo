@@ -1,0 +1,26 @@
+server:
+  port: ${vcap.application.port:10001}
+  
+info:
+  description: Data Service for Pet store
+  
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${vcap.services.discovery-service.credentials.uri:http://127.0.0.1:8761/eureka/,http://127.0.0.1:8762/eureka/}
+  instance:
+    hostname: ${vcap.application.uris[0]:localhost}
+
+---
+    
+spring:
+  profiles: local
+    
+---
+
+spring:
+  profiles: cloud
+  
+eureka:
+  instance:
+    nonSecurePort: 80
