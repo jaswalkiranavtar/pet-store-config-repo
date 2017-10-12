@@ -1,6 +1,3 @@
-server:
-  port: ${vcap.application.port:8080}
-
 info:
   description: Edge gateway to the application
   
@@ -28,13 +25,6 @@ zuul:
       path: /api/v1/auth/**
       serviceId: auth-service
       
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: ${vcap.services.discovery-service.credentials.uri:http://127.0.0.1:8761/eureka/,http://127.0.0.1:8762/eureka/}
-  instance:
-    hostname: ${vcap.application.uris[0]:localhost}
-
 ribbon:
   ReadTimeout: 60000
 
@@ -50,15 +40,5 @@ hystrix:
 spring:
   profiles: cloud
   
-eureka:
-  instance:
-    securePortEnabled: true
-    securePort: 443
-    nonSecurePortEnabled: false
-    nonSecurePort: 80
-    homePageUrl: https://${vcap.application.uris[0]}/
-    infoUrl: https://${vcap.application.uris[0]}/info
-    healthUrl: https://${vcap.application.uris[0]}/health
-    
 ribbon:
   IsSecure: true
