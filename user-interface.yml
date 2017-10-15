@@ -40,5 +40,5 @@ hystrix:
 spring:
   profiles: cloud
   
-ribbon:
-  IsSecure: true
+#ribbon:
+#  IsSecure: true
